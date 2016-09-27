@@ -28,6 +28,4 @@ if (isset($_SESSION['access_token']) && $_SESSION['access_token']){
 } else {
   $authUrl = $client->createAuthUrl();
   print "<a class='login' href='$authUrl'>Conectar</a>";	
-  //$redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/grupo10/oauth2callback.php';
-  //header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
 }
