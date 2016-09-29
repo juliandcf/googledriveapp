@@ -6,7 +6,7 @@ session_start();
 $client = new Google_Client();
 $client->setAuthConfigFile('client_secrets.json');
 //$client->addScope(Google_Service_Drive::DRIVE_METADATA_READONLY);
-$client->addScope("https://www.googleapis.com/auth/drive");
+//$client->addScope("https://www.googleapis.com/auth/drive");
 
 if (isset($_SESSION['access_token']) && $_SESSION['access_token']){
   $client->setAccessToken($_SESSION['access_token']);
@@ -31,8 +31,8 @@ if (isset($_SESSION['access_token']) && $_SESSION['access_token']){
 	  }
 	}
 } else {
-  $authUrl = $client->createAuthUrl();
-  print "<a class='login' href='$authUrl'>Conectar</a>";	
-  //$redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/grupo10/oauth2callback.php';
+  //$authUrl = $client->createAuthUrl();
+  //print "<a class='login' href='$authUrl'>Conectar</a>";	
+  $redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/grupo10/oauth2callback.php';
   //header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
 }

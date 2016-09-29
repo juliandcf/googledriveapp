@@ -8,6 +8,17 @@
     <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
     <script>
       function onSignIn(googleUser) {
+        var options = new gapi.auth2.SigninOptionsBuilder(
+        {'scope': 'email https://www.googleapis.com/auth/drive'});
+        googleUser.grant(options).then(
+       function(success){
+          console.log(JSON.stringify({message: "success", value: success}));
+         },
+        function(fail){
+          alert(JSON.stringify({message: "fail", value: fail}));
+         });
+
+
         // Useful data for your client-side scripts:
         var profile = googleUser.getBasicProfile();
         console.log("ID: " + profile.getId()); // Don't send this directly to your server!
@@ -20,7 +31,7 @@
         // The ID token you need to pass to your backend:
         var id_token = googleUser.getAuthResponse().id_token;
         console.log("ID Token: " + id_token);
-        window.location="./index.php";
+        window.location="./menu.html";
       };
     </script>
   </body>
