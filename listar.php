@@ -9,16 +9,15 @@ if (isset($_SESSION['access_token'])){
   $client->setAccessToken($_SESSION['access_token']);
   $drive_service = new Google_Service_Drive($client);
 	
-/*Se puede pasar parametros al listFiles como el $optParams para filtrar: quedaria algo asi
-  
+  /*
+  Para hacer consultas!!
+  https://developers.google.com/drive/v2/web/search-parameters*/
   $optParams = array(
-      'pageSize' => 10,
-     'fields' => 'nextPageToken, files(id, name)'
+     'fields' => 'files(id, name)'
   );
   $results = $drive_service->files->listFiles($optParams);
-*/
-  $results = $drive_service->files->listFiles();
 
+ /*$results = $drive_service->files->listFiles(); */
 	if (count($results->getFiles()) == 0) {
 	  print "No files found.\n";
 	} else {
