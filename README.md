@@ -1,8 +1,6 @@
-Google Drive Interaction 0.1
+# Google Drive Interaction 0.1
 
 ===========
-
-Interaccion con Google Drive v 0.1
 
 El objetivo de esta aplicacion web es el de interactuar con la Api de Google Drive:
 
