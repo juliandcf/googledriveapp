@@ -1,36 +1,30 @@
 <?php
+
 require_once 'google-api-php-client/autoload.php';
 
 session_start();
-$client = new Google_Client();
-$client->setAuthConfigFile('client_secrets.json');
-$client->addScope("https://www.googleapis.com/auth/drive");
-$nombre=$_POST["nombre"];
-$compartir=$_POST["compartir"];
-echo($_POST["nombre"]);
-$client->setAccessToken($_SESSION['access_token']);
- $drive_service = new Google_Service_Drive($client);
+if (isset($_SESSION['access_token'])){
 
+  $nombre=$_POST["nombre"];
+  $compartir=$_POST["compartir"];
 
-/*Creo el archivo*/
+  $client = new Google_Client();
+  $client->setAccessToken($_SESSION['access_token']);
+  $drive_service = new Google_Service_Drive($client);
 
-/*Los distintos tipos de mime https://developers.google.com/drive/v3/web/mime-types */
-$fileMetadata = new Google_Service_Drive_DriveFile(array(
+  /*Los distintos tipos de mime https://developers.google.com/drive/v3/web/mime-types */
+  $fileMetadata = new Google_Service_Drive_DriveFile(array(
   'name' => $nombre,
   'mimeType' => 'application/vnd.google-apps.document'));
+  $file = $drive_service->files->create($fileMetadata, array(
+  'fields' => 'id, name')); 
 
-$file = $drive_service->files->create($fileMetadata, array(
-  'fields' => 'id', 'name'));
+  printf("File ID creado: %s\n", $file->id);
 
+  $drive_service->getClient()->setUseBatch(true);
+  $batch = $drive_service->createBatch();
 
-printf("File ID creado: %s\n", $file->id);
-
-/*Le doy permisos al archivo*/
-$drive_service->getClient()->setUseBatch(true);
-$batch = $drive_service->createBatch();
-
-
- $userPermission = new Google_Service_Drive_Permission(array(
+  $userPermission = new Google_Service_Drive_Permission(array(
     'type' => 'user',
     'role' => 'writer',
     'emailAddress' => $compartir
@@ -49,9 +43,9 @@ $batch = $drive_service->createBatch();
     }
   }
 
+} else {
+  echo"error";
 
-
-
-
+}
 
 ?>
