@@ -16,8 +16,8 @@ if (isset($_SESSION['access_token'])){
 'q' => "name contains 'Prueba'", 
   */
   $optParams = array(
-      'q' => "",
-     'corpus' => 'domain',
+      'q' => "trashed=false",
+     'corpus' => 'user',
      'fields' => 'files(id,name,capabilities(canShare),shared, parents)'
   );
   $results = $drive_service->files->listFiles($optParams);
@@ -31,7 +31,7 @@ if (isset($_SESSION['access_token'])){
       ];
       array_push($archivos, $arch_temp);
     }
-    
+
   $msjExito=$_GET["msjExito"];
   $msjError=$_GET["msjError"];
  load_template_twig("listar_archivos.html", array('files' => $archivos, 'msjExito' => $msjExito, 'msjError' => $msjError));   

@@ -8,7 +8,7 @@ session_start();
 $client = new Google_Client();
 $client->setAuthConfigFile('client_secrets.json');
 $client->setRedirectUri('http://' . $_SERVER['HTTP_HOST'] . '/grupo10/index.php');
-$client->addScope("https://www.googleapis.com/auth/drive.file");
+$client->addScope("https://www.googleapis.com/auth/drive");
 
 if (!isset($_GET['code'])) {
   $auth_url = $client->createAuthUrl();
