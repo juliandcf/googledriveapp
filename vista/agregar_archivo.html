@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DSSD - 2016 - Cloud y API drive</title>
+ 
+    <!-- CSS de Bootstrap -->
+    <link href="vista/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <link rel="stylesheet" type="text/css" href="vista/bootstrap/dist/css/starter-template.css">
+ 
+    <!-- librerías opcionales que activan el soporte de HTML5 para IE8 -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function swap(value){
+        if(value)
+        {
+          document.getElementById("mail").disabled=false
+        }
+        else
+        {
+          document.getElementById("mail").disabled=true;
+        }
+      }
+
+      
+
+    </script>
+
+  </head>
+  <body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">da Costa Faro - Tittarelli</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="listar.php">Listar</a></li>
+            <li class="active"><a href="#">Agregar Archivos</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    
+    
+<div class="container">
+<h1>Agregar archivo</h1>
+{% if msjError|length > 0 %}
+        <div class="alert alert-danger">
+          <p>{{ msjError }}</p>
+        </div>
+      {% endif %}
+<form role="form" method="post" action="subir_archivo.php">
+  <div class="form-group">
+    <label for="nombre">Nombre</label>
+    <input type="text" class="form-control" id="nombre" name="nombre"
+           placeholder="Introduce el nombre del archivo" required="required">
+  </div>
+  <div class="form-group">
+    <label for="comparte">
+      <input name="comparte" onClick="swap(this.checked)" type="checkbox"> Compartir?
+    </label>
+    <br>
+    <label for="mail">Email:</label>
+    <input type="email" class="form-control" id="mail" name="mail"
+           placeholder="Ingresa el gmail del usuario al que se desea compartir el archivo" disabled>
+  </div>
+  <button type="submit" class="btn btn-default">Enviar</button>
+</form>
+
+
+    <!-- Librería jQuery requerida por los plugins de JavaScript -->
+    <script src="http://code.jquery.com/jquery.js"></script>
+ 
+    <!-- Todos los plugins JavaScript de Bootstrap (también puedes
+         incluir archivos JavaScript individuales de los únicos
+         plugins que utilices) -->
+    <script src="vista/bootstrap/dist/js/bootstrap.min.js"></script>
+
+ </div>   
+  </body>
+</html>
+

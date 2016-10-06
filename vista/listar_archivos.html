@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0">
+	<title>DSSD - 2016 - Cloud y API drive</title>
+	<link rel="stylesheet" type="text/css" href="vista/css/jquery.dataTables.css">
+	<link rel="stylesheet" type="text/css" href="vista/css/demo.css">
+
+	 <!-- CSS de Bootstrap -->
+    <link href="vista/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <link rel="stylesheet" type="text/css" href="vista/bootstrap/dist/css/starter-template.css">
+
+	<style type="text/css" class="init">
+	
+	</style>
+	<script type="text/javascript" language="javascript" src="vista/js/jquery-1.12.3.js">
+	</script>
+	<script type="text/javascript" language="javascript" src="vista/js/jquery.dataTables.js">
+	</script>
+	<script type="text/javascript" language="javascript" class="init">
+		$(document).ready(function() {
+			$('#example').DataTable();
+		} );
+	</script>
+</head>
+<body class="dt-example">
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">da Costa Faro - Tittarelli</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Listar</a></li>
+            <li><a href="agregar_archivo.php">Agregar Archivos</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+	<div class="container">
+		<section>
+			<h1>Listado de archivos</h1>
+			{% if msjExito|length > 0 %}
+				<div class="alert alert-success">
+					<p>{{ msjExito }}</p>
+				</div>
+			{% endif %}
+			{% if msjError|length > 0 %}
+				<div class="alert alert-danger">
+					<p>{{ msjError }}</p>
+				</div>
+			{% endif %}
+
+			<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nombre</th>
+						<th>Estado</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<th>Id</th>
+						<th>Nombre</th>
+					</tr>
+				</tfoot>
+				<tbody>
+				{% for file in files %}
+					<tr>
+						<th>{{file.id}}</th>
+						<th>{{file.nombre}}</th>
+						{% if file.compartido == 1 %}
+							<th><a href="dejar_compartir.php?id={{file.id}}">DEJAR DE COMPARTIR</a></th>
+						{% else %}	
+							<th><a href="compartir_archivo.php?id={{file.id}}&nombre={{file.nombre}}">COMPARTIR</a></th>
+						{% endif %}	
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+		</section>
+	</div>
+
+</body>
+</html>

@@ -17,7 +17,7 @@ if (!isset($_GET['code'])) {
   $client->authenticate($_GET['code']);
   $_SESSION['access_token'] = $client->getAccessToken();
   print_r($_SESSION);
-  header("Location: http://localhost/grupo10/menu.html");
+  header("Location: http://localhost/grupo10/listar.php");
 }
 
 ?>
