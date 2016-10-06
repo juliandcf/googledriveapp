@@ -17,8 +17,9 @@ if (isset($_SESSION['access_token'])){
   */
   $optParams = array(
       'q' => "trashed=false",
+      'orderBy' => 'createdTime desc',
      'corpus' => 'user',
-     'fields' => 'files(id,name,capabilities(canShare),shared, parents)'
+     'fields' => 'files(id,name,capabilities(canShare),shared)'
   );
   $results = $drive_service->files->listFiles($optParams);
   
@@ -29,7 +30,7 @@ if (isset($_SESSION['access_token'])){
       "id" => $file->getId(),
       "compartido" => $file->shared,
       ];
-      array_push($archivos, $arch_temp);
+      $archivos[]=$arch_temp;
     }
 
   $msjExito=$_GET["msjExito"];
