@@ -44,18 +44,26 @@
           <p>{{ msjError }}</p>
         </div>
       {% endif %}
-<form role="form" method="post" action="compartir_archivo.php">
-  <div class="form-group">
-    <label for="nombre">Nombre del archivo a compartir</label>
+<form class="form-horizontal" role="form" method="post" action="compartir_archivo.php">
+  <div class="form-group row">
+    <label class="col-xs-2 col-form-label" for="nombre">Nombre del archivo</label>
+    <div class="col-sm-10">
     <input type="text" class="form-control" id="nombre" name="nombre" value="{{nombre}}"
            placeholder="Introduce el nombre del archivo" disabled>
+     </div>      
   </div>
-  <div class="form-group">
-    <label for="mail">Email:</label>
-    <input type="email" class="form-control" id="mail" name="mail"
+  <div class="form-group row">
+    <label class="col-xs-2 col-form-label" for="mail">Email</label>
+    <div class="col-sm-10">
+    <div class="input-group">
+    <input type="text" class="form-control" id="mail" name="mail"
            placeholder="Ingrese SOLO EL USUARIO de gmail al que se desea compartir el archivo">
-           <span class="help-block">Si el usuario es ejemplo@gmail.com ingrese solo ejemplo</span>
-  </div>
+           <div class="input-group-addon">@gmail.com</div>
+     </div>
+     <small class="form-text text-muted">Si el usuario es ejemplo@gmail.com ingrese solo ejemplo</small>      
+     </div>      
+    </div>       
+           
   <input type="hidden" name="id" value="{{id}}">
 
   <button type="submit" class="btn btn-default">Enviar</button>

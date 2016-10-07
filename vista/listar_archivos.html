@@ -79,8 +79,14 @@
 					<tr>
 						<th>{{file.id}}</th>
 						<th>{{file.nombre}}</th>
+
 						{% if file.compartido == 1 %}
+							{% if file.owner == 1 %}
 							<th><a href="dejar_compartir.php?id={{file.id}}">DEJAR DE COMPARTIR</a></th>
+							{% else %}
+								<th><a href="dejar_compartir.php?id={{file.id}}">NO ME INTERESA</a></th>	
+							{% endif %}	
+							
 						{% else %}	
 							<th><a href="compartir_archivo.php?id={{file.id}}&nombre={{file.nombre}}">COMPARTIR</a></th>
 						{% endif %}	

@@ -19,7 +19,7 @@ if (isset($_SESSION['access_token'])){
       'q' => "trashed=false",
       'orderBy' => 'createdTime desc',
      'corpus' => 'user',
-     'fields' => 'files(id,name,capabilities(canShare),shared)'
+     'fields' => 'files(id,name,capabilities(canShare),shared,owners(me))'
   );
   $results = $drive_service->files->listFiles($optParams);
   
@@ -29,10 +29,12 @@ if (isset($_SESSION['access_token'])){
       "nombre" => $file->getName(),
       "id" => $file->getId(),
       "compartido" => $file->shared,
+      "owner" => $file->owners[0]->me,
       ];
       $archivos[]=$arch_temp;
     }
 
+  
   $msjExito=$_GET["msjExito"];
   $msjError=$_GET["msjError"];
  load_template_twig("listar_archivos.html", array('files' => $archivos, 'msjExito' => $msjExito, 'msjError' => $msjError));   
